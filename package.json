@@ -1,0 +1,26 @@
+{
+  "name": "betroulette",
+  "version": "1.0.0",
+  "description": "Code of online bet roulette",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "betRoulette"
+  },
+  "keywords": [
+    "Online",
+    "bet",
+    "roulette"
+  ],
+  "author": "Fabian Sierra Gonzalez",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}

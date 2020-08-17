@@ -1,0 +1,17 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const createRoulette = require('./endpoints/createRoulette/createRouletteRoutes');
+const openRoulette = require('./endpoints/openRoulette/openRouletteRoutes');
+const listRoulettes = require('./endpoints/listRoulettes/listRoulettesRoutes');
+const betNumber = require('./endpoints/betNumber/betNumberRoutes');
+const closeBet = require('./endpoints/closeBet/closeBetRoutes');
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use('/app',express.static('public'));
+app.use('/api/createRoulette', createRoulette);
+app.use('/api/openRoulette', openRoulette);
+app.use('/api/listRoulettes', listRoulettes);
+app.use('/api/betNumber', betNumber);
+app.use('/api/closeBet', closeBet);
+module.exports = app;
