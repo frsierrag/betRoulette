@@ -1,14 +1,15 @@
 let firebase = require('../../common/firebase');
-exports.openRoulette = function (res, req) {
+exports.openRoulette = async function (idRoulette) {
     let openStatus = {};
     openStatus.statusOperation = false;
-    firebase.ref('dataRoulette').once('value', (snapchot) => {
+    await firebase.ref('dataRoulette').once('value', (snapchot) => {
         const data = snapchot.val();
         for (let elementData in data) {
-            if (req.req.body.idRoulette == data[elementData].idRoulette) {
-                openStatus.statusOperation = data[elementData].status;
-                return res.res.status(200).send(openStatus); 
+            if (idRoulette == data[elementData].idRoulette) {
+                openStatus.statusOperation = data[elementData].statusRoulette;
+                break;
             }
-        } 
-    });    
+        }
+    });
+    return openStatus;
 }
