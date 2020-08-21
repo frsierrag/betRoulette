@@ -15,6 +15,7 @@ exports.closeRoulette = async function (idRoulette) {
         });
     });
     betResults = betResultsByIdRoulette(idRoulette);
+    //betResults = operationMadesByIdRoulette(idRoulette);
     return betResults;
 }
 async function operationMadesByIdRoulette(idRoulette) {
@@ -38,7 +39,7 @@ async function betResultsByIdRoulette(idRoulette) {
     await firebase.ref('betMades').once('value', snapchot => {
         snapchot.forEach(childSnapshot => {
             let childData = childSnapshot.val();
-            if (childData.dealStatus == msg.messagesCodes.successStatus) {
+            if (childData.idRoulette == idRoulette && childData.dealStatus == msg.messagesCodes.successStatus) {
                 totalNumberBets = totalNumberBets + 1;
                 if (childData.result.betStatus == msg.messagesCodes.wonBet) {
                     totalWonBets = totalWonBets + 1;                                

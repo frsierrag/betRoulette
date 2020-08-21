@@ -60,14 +60,11 @@ function colorProfits(colorBet, betAmount) {
     let valueRandom = 0;
     let codeColor;
     colorBet == msg.messagesCodes.redColor ? codeColor = 1 : codeColor = 2;
-    console.log(codeColor, colorBet)
     let result = {};
     valueRandom = Math.floor(Math.random() * (3 - 1) + 1);
-    console.log('code', valueRandom)
     valueRandom == codeColor ? profits = betAmount * 2 : profits = 0;
     valueRandom == 1 ? result.colorResult = msg.messagesCodes.redColor : 
         result.colorResult = msg.messagesCodes.blackColor;
-    console.log('result', valueRandom)
     result.betAmount = betAmount;
     result.fee = 2.0;
     result.profits = profits;    
