@@ -14,16 +14,4 @@ exports.betController = async function (idRoulette, idUser, number, color, betAm
             resolve(bet);
         }
     })
-    /*
-    const body = {};
-    body.number = number;
-    body.color = color;
-    body.betAmount = betAmount;
-    if (betValidation.operation(body).length > 0) {
-        const errors = betValidation.operation(body);
-        return errors;
-    }        
-    let bet = await betOperations.bet(idRoulette, idUser, number, color, betAmount);
-    return bet;
-    */
 }

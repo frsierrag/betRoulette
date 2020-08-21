@@ -4,7 +4,7 @@ const createRoulette = require('./endpoints/createRoulette/createRouletteRoutes'
 const openRoulette = require('./endpoints/openRoulette/openRouletteRoutes');
 const listRoulettes = require('./endpoints/listRoulettes/listRoulettesRoutes');
 const bet = require('./endpoints/bet/betRoutes');
-const closeBet = require('./endpoints/closeBet/closeBetRoutes');
+const closeBet = require('./endpoints/closeRoulette/closeRouletteRoutes');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -12,6 +12,6 @@ app.use('/app',express.static('public'));
 app.use('/api/createRoulette', createRoulette);
 app.use('/api/openRoulette', openRoulette);
 app.use('/api/listRoulettes', listRoulettes);
-app.use('/api/bet', bet);
-app.use('/api/closeBet', closeBet);
+app.use('/api/bet/', bet);
+app.use('/api/closeRoulette', closeBet);
 module.exports = app;
