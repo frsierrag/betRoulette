@@ -1,7 +1,7 @@
 const errorCodes = {
-    rouletteNotOpen: "01. Roulette isn't open. Try in a roulette diferent.",
-    betNumberAndColor: "02. Cann't send number and color at same time.",
-    noNumberNoColor: "03. Need sending a number or color for you bet." 
+    rouletteNotOpen: "3. Roulette isn't open. Try in a roulette diferent.",
+    betNumberAndColor: "4. Cann't send number and color at same time.",
+    noNumberNoColor: "5. Need sending a number or color for you bet." 
 };
 const messagesCodes = {
     successStatus: "Success",
@@ -9,6 +9,7 @@ const messagesCodes = {
     wonBet: "Won bet",
     lostBet: "Lost bet",
     redColor: "red",
-    blackColor: "black"
+    blackColor: "black",
+    datSpace: ". "
 }
 module.exports = { errorCodes, messagesCodes };
