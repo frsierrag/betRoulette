@@ -10,14 +10,14 @@ exports.betRoulette = async function (idRoulette, idUser, number, color, betAmou
     let validationType = validationTypeNumberColorAmount(number, color, betAmount);
     if (validationType.dealStatus == msg.messagesCodes.successStatus) {        
         let openStatus = await open.openRoulette(idRoulette);
-        if (openStatus.statusOperation == true) {     
+        if (openStatus.statusOperation == msg.messagesCodes.successStatus) {
             let validationNumberOrColor = validationOnlyBetNumberOrColor(number, color, betAmount); 
-            bet.numberBet = validationNumberOrColor.numberBet;
-            bet.colorBet = validationNumberOrColor.colorBet;
-            bet.result = validationNumberOrColor.result;
+            if (validationNumberOrColor.numberBet) bet.numberBet = validationNumberOrColor.numberBet;
+            if (validationNumberOrColor.colorBet) bet.colorBet = validationNumberOrColor.colorBet;
+            if (validationNumberOrColor.result) bet.result = validationNumberOrColor.result;
             bet.dealStatus = validationNumberOrColor.dealStatus;
-            bet.error = validationNumberOrColor.error;
-        } else {            
+            if (validationNumberOrColor.error) bet.error = validationNumberOrColor.error;
+        } else {
             bet.dealStatus = msg.messagesCodes.rejectedStatus;
             bet.error = msg.errorCodes.rouletteNotOpen;
         }
@@ -25,7 +25,7 @@ exports.betRoulette = async function (idRoulette, idUser, number, color, betAmou
         bet.dealStatus = validationType.dealStatus;
         bet.error = validationType.error;
     }       
-    firebase.ref('betMades').push(bet);
+    await firebase.ref('betMades').push(bet);
     return bet;
 }
 function validationTypeNumberColorAmount(number, color, betAmount) {
