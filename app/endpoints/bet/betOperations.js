@@ -51,7 +51,7 @@ function numberProfits(numberBet, betAmount) {
         result.totalAmount = 0;
         result.betStatus = msg.messagesCodes.lostBet;
     }
-    result.date = dateFormat(new Date(), "isoDateTime");
+    result.date = dateFormat(new Date(), 'isoDateTime');
     return result;
 }
 function colorProfits(colorBet, betAmount) {
@@ -74,6 +74,6 @@ function colorProfits(colorBet, betAmount) {
         result.totalAmount = 0;
         result.betStatus = msg.messagesCodes.lostBet;
     }
-    result.date = dateFormat(new Date(), "isoDateTime");
+    result.date = dateFormat(new Date(), 'isoDateTime');
     return result;
 }
