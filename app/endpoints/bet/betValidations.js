@@ -1,10 +1,12 @@
 const Schema = require('validate');
-const validators = require('../../common/validators');
+const validColor = require('../../common/models/color');
+const validNumber = require('../../common/models/number');
+const validAmount = require('../../common/models/amount');
 const validator = {
     validationSchema: {
-        number: validators.validations.numberBet,
-        color: validators.validations.colorBet,
-        betAmount: validators.validations.betAmount
+        number: validNumber,
+        color: validColor,
+        betAmount: validAmount
     },
     validation(objectToValidate) {
         return new Schema(this.validationSchema).validate(objectToValidate);

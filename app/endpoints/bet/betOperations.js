@@ -39,7 +39,6 @@ function numberProfits(numberBet, betAmount) {
     let valueRandom = 0;
     let result = {};
     valueRandom = Math.floor(Math.random() * (37));
-    valueRandom = 13;
     valueRandom == numberBet ? profits = betAmount * 37 : profits = 0;    
     result.numberResult = valueRandom;  
     result.betAmount = betAmount;
@@ -52,7 +51,7 @@ function numberProfits(numberBet, betAmount) {
         result.totalAmount = 0;
         result.betStatus = msg.messagesCodes.lostBet;
     }
-    result.date = dateFormat();
+    result.date = dateFormat(new Date(), "isoDateTime");
     return result;
 }
 function colorProfits(colorBet, betAmount) {
@@ -75,6 +74,6 @@ function colorProfits(colorBet, betAmount) {
         result.totalAmount = 0;
         result.betStatus = msg.messagesCodes.lostBet;
     }
-    result.date = dateFormat();
+    result.date = dateFormat(new Date(), "isoDateTime");
     return result;
 }
