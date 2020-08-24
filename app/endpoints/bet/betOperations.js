@@ -9,7 +9,7 @@ exports.betRoulette = async function (idRoulette, idUser, number, color, betAmou
     bet.idUser = idUser;
     let validationType = validationTypeNumberColorAmount(number, color, betAmount);
     if (validationType.dealStatus == msg.messagesCodes.successStatus) {        
-        let openStatus = await open.openRoulette(idRoulette);
+        let openStatus = await open.openRoulette(idRoulette, true);
         if (openStatus.statusOperation == msg.messagesCodes.successStatus) {
             let validationNumberOrColor = validationOnlyBetNumberOrColor(number, color, betAmount); 
             if (validationNumberOrColor.numberBet) bet.numberBet = validationNumberOrColor.numberBet;

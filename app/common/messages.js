@@ -1,5 +1,5 @@
 const errorCodes = {
-    rouletteNotOpen: "3. Roulette isn't open. Try in a roulette diferent.",
+    rouletteNotOpen: "3. Roulette isn't open. Try in a roulette different.",
     betNumberAndColor: "4. Cann't send number and color at same time.",
     noNumberNoColor: "5. Need sending a number or color for you bet." 
 };
