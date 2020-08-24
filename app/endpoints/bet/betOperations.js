@@ -37,8 +37,8 @@ function validationTypeNumberColorAmount(number, color, betAmount) {
     if (betValidation.operation(validate).length > 0) {
         validaBet.dealStatus = msg.messagesCodes.rejectedStatus;
         validaBet.error = [];
-        betValidation.operation(validate).forEach((element, index) => {
-            validaBet.error.push(index + msg.messagesCodes.datSpace + element.toString());
+        betValidation.operation(validate).forEach((error, index) => {
+            validaBet.error.push(index + msg.messagesCodes.datSpace + error.toString());
         });
         return validaBet;
     } else {

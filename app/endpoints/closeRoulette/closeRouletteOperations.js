@@ -2,12 +2,12 @@ let firebase = require('../../common/firebase');
 const msg = require('../../common/messages');
 exports.closeRoulette = async function (idRoulette) {
     let betResults = {};
-    await firebase.ref('dataRoulette').once('value', snapchot => {
-        snapchot.forEach(childSnapshot => {
-            let childData = childSnapshot.val();
-            let childKey = childSnapshot.key;
-            if (childData.idRoulette == idRoulette) {
-                firebase.ref('dataRoulette/' + childKey).set({
+    await firebase.ref('dataRoulette').once('value', snapshot => {
+        snapshot.forEach(childSnapshot => {
+            let dataRoulette = childSnapshot.val();
+            let keyRoulette = childSnapshot.key;
+            if (dataRoulette.idRoulette == idRoulette) {
+                firebase.ref('dataRoulette/' + keyRoulette).set({
                     idRoulette: idRoulette,
                     statusRoulette: false
                 });
@@ -19,16 +19,16 @@ exports.closeRoulette = async function (idRoulette) {
     return betResults;
 }
 async function operationMadesByIdRoulette(idRoulette) {
-    let briefBetMade = [];
-    await firebase.ref('betMades').once('value', snapchot => {
-        snapchot.forEach(childSnapshot => {
-            let childData = childSnapshot.val();
-            if (childData.idRoulette == idRoulette) {
-                briefBetMade.push(childData);
+    let summaryBetMade = [];
+    await firebase.ref('betMades').once('value', snapshot => {
+        snapshot.forEach(childSnapshot => {
+            let dataBetMades = childSnapshot.val();
+            if (dataBetMades.idRoulette == idRoulette) {
+                summaryBetMade.push(dataBetMades);
             }
         });
     });
-    return briefBetMade;
+    return summaryBetMade;
 }
 async function betResultsByIdRoulette(idRoulette) {
     let betResults = {};
@@ -36,22 +36,22 @@ async function betResultsByIdRoulette(idRoulette) {
     let totalWonBets = 0;
     let totalAmountTakedByRoulette = 0;
     let totalAmountPaidByRoulette = 0;
-    await firebase.ref('betMades').once('value', snapchot => {
-        snapchot.forEach(childSnapshot => {
-            let childData = childSnapshot.val();
-            if (childData.idRoulette == idRoulette && childData.dealStatus == msg.messagesCodes.successStatus) {
+    await firebase.ref('betMades').once('value', snapshot => {
+        snapshot.forEach(childSnapshot => {
+            let dataBetMades = childSnapshot.val();
+            if (dataBetMades.idRoulette == idRoulette && dataBetMades.dealStatus == msg.messagesCodes.successStatus) {
                 totalNumberBets = totalNumberBets + 1;
-                if (childData.result.betStatus == msg.messagesCodes.wonBet) {
+                if (dataBetMades.result.betStatus == msg.messagesCodes.wonBet) {
                     totalWonBets = totalWonBets + 1;                                
                 }
-                totalAmountTakedByRoulette = totalAmountTakedByRoulette + childData.result.betAmount;
-                totalAmountPaidByRoulette = totalAmountPaidByRoulette + childData.result.profits;                               
+                totalAmountTakedByRoulette = totalAmountTakedByRoulette + dataBetMades.result.betAmount;
+                totalAmountPaidByRoulette = totalAmountPaidByRoulette + dataBetMades.result.profits;                               
             }            
         });
     });
     betResults.totalNumberBets = totalNumberBets;
     betResults.totalWonBets = totalWonBets;
-    betResults.totalAmountTakedByRoulette = totalAmountTakedByRoulette;
+    betResults.totalAmountCollectedByRoulette = totalAmountTakedByRoulette;
     betResults.totalAmountPaidByRoulette = totalAmountPaidByRoulette;
     betResults.gainByRoulette = totalAmountTakedByRoulette - totalAmountPaidByRoulette;
     return betResults;
